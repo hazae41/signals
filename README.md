@@ -1,6 +1,6 @@
 # Signals
 
-Utils for AbortSignals
+Utilities to deal with AbortSignal
 
 ```bash
 npm i @hazae41/signals

@@ -2,7 +2,7 @@
   "type": "module",
   "name": "@hazae41/signals",
   "version": "0.0.0",
-  "description": "Utils for AbortSignals",
+  "description": "Utilities to deal with AbortSignal",
   "homepage": "https://github.com/hazae41/signals",
   "repository": "github:hazae41/decibel",
   "author": "hazae41",
