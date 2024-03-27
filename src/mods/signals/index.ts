@@ -25,6 +25,9 @@ export function merge(a: AbortSignal, b?: AbortSignal) {
 }
 
 export function resolveOnAbort(signal: AbortSignal) {
+  if (signal.aborted)
+    return new Disposer(Promise.resolve(), () => { })
+
   const resolveOnAbort = new Future<void>()
 
   const onAbort = () => resolveOnAbort.resolve()
@@ -38,6 +41,9 @@ export function resolveOnAbort(signal: AbortSignal) {
 }
 
 export function rejectOnAbort(signal: AbortSignal) {
+  if (signal.aborted)
+    return new Disposer(Promise.reject(new Error("Aborted")), () => { })
+
   const rejectOnAbort = new Future<never>()
 
   const onAbort = () => rejectOnAbort.reject(new Error("Aborted"))
