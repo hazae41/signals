@@ -9,6 +9,11 @@ export function merge(a: AbortSignal, b?: AbortSignal) {
   if (b == null)
     return a
 
+  if (a.aborted)
+    return a
+  if (b.aborted)
+    return b
+
   const c = new AbortController()
 
   const onAbort = (reason?: unknown) => {
