@@ -55,7 +55,7 @@
     "unit-tested"
   ],
   "dependencies": {
-    "@hazae41/disposer": "^2.0.11",
+    "@hazae41/disposer": "^2.0.20",
     "@hazae41/future": "^1.0.3"
   }
 }
