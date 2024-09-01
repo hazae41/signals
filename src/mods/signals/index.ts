@@ -1,34 +1,6 @@
 import { Disposer } from "@hazae41/disposer"
 import { Future } from "@hazae41/future"
 
-export function never() {
-  return new AbortController().signal
-}
-
-export function merge(a: AbortSignal, b?: AbortSignal) {
-  if (b == null)
-    return a
-
-  if (a.aborted)
-    return a
-  if (b.aborted)
-    return b
-
-  const c = new AbortController()
-
-  const onAbort = (reason?: unknown) => {
-    c.abort(reason)
-
-    a.removeEventListener("abort", onAbort)
-    b.removeEventListener("abort", onAbort)
-  }
-
-  a.addEventListener("abort", onAbort, { passive: true })
-  b.addEventListener("abort", onAbort, { passive: true })
-
-  return c.signal
-}
-
 export function resolveOnAbort(signal: AbortSignal) {
   if (signal.aborted)
     return new Disposer(Promise.resolve(), () => { })
@@ -40,7 +12,7 @@ export function resolveOnAbort(signal: AbortSignal) {
 
   signal.addEventListener("abort", onAbort, { passive: true })
 
-  resolveOnAbort.promise.then(onClean).then(() => { throw new Error("Aborted") })
+  resolveOnAbort.promise.then(onClean)
 
   return new Disposer(resolveOnAbort.promise, onClean)
 }
