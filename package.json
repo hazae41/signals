@@ -24,11 +24,11 @@
   "devDependencies": {
     "@hazae41/phobos": "^1.0.10",
     "@hazae41/rimraf": "^1.0.1",
-    "@rollup/plugin-typescript": "^11.1.5",
-    "@types/node": "^20.8.4",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@types/node": "^22.15.21",
     "rollup": "^4.0.2",
     "rollup-plugin-dts": "^6.1.0",
-    "rollup-plugin-node-externals": "^6.1.2",
+    "rollup-plugin-node-externals": "^8.0.0",
     "typescript": "^5.2.2"
   },
   "exports": {
@@ -55,7 +55,7 @@
     "unit-tested"
   ],
   "dependencies": {
-    "@hazae41/disposer": "^2.0.20",
-    "@hazae41/future": "^1.0.3"
+    "@hazae41/box": "^3.0.1",
+    "@hazae41/future": "^2.0.1"
   }
 }

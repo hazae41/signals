@@ -1,4 +1,4 @@
-import { Disposer } from "@hazae41/disposer"
+import { Pin } from "@hazae41/box"
 import { Future } from "@hazae41/future"
 
 export class AbortError extends Error {
@@ -11,7 +11,7 @@ export class AbortError extends Error {
 
 export function resolveOnAbort(signal: AbortSignal) {
   if (signal.aborted)
-    return new Disposer(Promise.resolve(signal.reason), () => { })
+    return Pin.with(Promise.resolve(signal.reason), () => { })
 
   const resolveOnAbort = new Future<unknown>()
 
@@ -22,12 +22,12 @@ export function resolveOnAbort(signal: AbortSignal) {
 
   resolveOnAbort.promise.then(onClean)
 
-  return new Disposer(resolveOnAbort.promise, onClean)
+  return Pin.with(resolveOnAbort.promise, onClean)
 }
 
 export function rejectOnAbort(signal: AbortSignal) {
   if (signal.aborted)
-    return new Disposer(Promise.reject(new AbortError(signal)), () => { })
+    return Pin.with(Promise.reject(new AbortError(signal)), () => { })
 
   const rejectOnAbort = new Future<never>()
 
@@ -38,5 +38,5 @@ export function rejectOnAbort(signal: AbortSignal) {
 
   rejectOnAbort.promise.catch(onClean)
 
-  return new Disposer(rejectOnAbort.promise, onClean)
+  return Pin.with(rejectOnAbort.promise, onClean)
 }
